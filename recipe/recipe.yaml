@@ -1,5 +1,5 @@
 context:
-  version: "0.1.0"
+  version: "0.2.0"
 
 package:
   name: libasdf
@@ -7,29 +7,12 @@ package:
 
 source:
   url: https://github.com/asdf-format/libasdf/releases/download/${{ version }}/libasdf-${{ version }}.tar.gz
-  sha256: efe0ad1938ee84502fea821afebe3e57e7abe9d19232c725229a93bd439cb498
+  sha256: 6953639854469a6c61acc58a36e3b8ef545ea132e4495d89d9636acf6b8120c4
 
 build:
   number: 0
   skip: win
   script:
-    # libasdf has a test that checks that no unintended symbols are visible
-    # from the final shared object. Unfortunately conda's older glibc leaks
-    # _init and _fini with default visibility, causing that test to fail.
-    # Instructing the linker to make those symbols local-only has no apparent
-    # downside, so apply this workaround until the upstream test can be fixed
-    # to make this exception.
-    - if: linux
-      then:
-      - |
-        cat > linker-syms.map <<'EOF'
-        {
-          local:
-            _init;
-            _fini;
-        };
-        EOF
-      - export LDFLAGS="${LDFLAGS} -Wl,--version-script=${SRC_DIR}/linker-syms.map"
     - ./configure --prefix="${PREFIX}" --disable-docs
     - make -j${CPU_COUNT}
     - |
