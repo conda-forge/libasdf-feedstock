@@ -1,5 +1,5 @@
 context:
-  version: "0.2.2"
+  version: "0.3.0"
 
 package:
   name: libasdf
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/asdf-format/libasdf/releases/download/${{ version }}/libasdf-${{ version }}.tar.gz
-  sha256: cbccf73c2dbd2093dfe8b68f2e366ff7a4b87754f30b4b2d60eb51b3b1a02808
+  sha256: 56d3d6ffc1c182a808e812da0f941537c1a0e98922eb78cbfbe3b0a896e10b6d
 
 build:
   number: 0
