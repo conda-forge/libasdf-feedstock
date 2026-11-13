@@ -10,7 +10,7 @@ source:
   sha256: 56d3d6ffc1c182a808e812da0f941537c1a0e98922eb78cbfbe3b0a896e10b6d
 
 build:
-  number: 0
+  number: 1
   skip: win
   script:
     - ./configure --prefix="${PREFIX}" --disable-docs
